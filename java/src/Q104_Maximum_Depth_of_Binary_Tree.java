@@ -1,17 +1,6 @@
-public class Q104_Maximum_Depth_of_Binary_Tree {
+import common.TreeNode;
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode() {}
-        TreeNode(int val) { this.val = val; }
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
+public class Q104_Maximum_Depth_of_Binary_Tree {
 
     public int maxDepth(TreeNode root) {
         if (root == null)
@@ -29,16 +18,8 @@ public class Q104_Maximum_Depth_of_Binary_Tree {
 
     public static void main(String[] args) {
         Q104_Maximum_Depth_of_Binary_Tree obj = new Q104_Maximum_Depth_of_Binary_Tree();
-        TreeNode root = obj.createTree();
+        Integer[] arr = new Integer[]{3,9,20,null,null,15,7};
+        TreeNode root = TreeNode.createTree(arr);
         System.out.println(obj.maxDepth(root));
-    }
-
-    private TreeNode createTree() {
-        TreeNode n9 = new TreeNode(9, null, null);
-        TreeNode n15 = new TreeNode(15, null, null);
-        TreeNode n7 = new TreeNode(7, null, null);
-        TreeNode n20 = new TreeNode(20, n15, n7);
-        TreeNode n3 = new TreeNode(3, n9, n20);
-        return n3;
     }
 }
