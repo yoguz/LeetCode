@@ -34,6 +34,23 @@ public class Q206_Reverse_Linked_List {
         return reverseListRecursiveHelper(cur, next);
     }
 
+    public ListNode reverseList(ListNode head) {
+        if ( head == null )
+            return null;
+
+        ListNode firstHead = head, temp = head.next, temp2;
+
+        while (head != null && temp != null) {
+            temp2 = temp.next;
+            temp.next = head;
+            head = temp;
+            temp = temp2;
+        }
+
+        firstHead.next = null;
+        return head;
+    }
+
     public static void main(String[] args) {
         Q206_Reverse_Linked_List obj = new Q206_Reverse_Linked_List();
         int[] nodes = new int[]{1,2,3,4,5};
