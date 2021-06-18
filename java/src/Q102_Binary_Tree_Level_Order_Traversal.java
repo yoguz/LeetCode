@@ -1,18 +1,19 @@
 import common.TreeNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Q102_Binary_Tree_Level_Order_Traversal {
 
 
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrderOld(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        helper(res, root, 0);
+        helperOld(res, root, 0);
         return res;
     }
 
-    private void helper(List<List<Integer>> list, TreeNode node, int level) {
+    private void helperOld(List<List<Integer>> list, TreeNode node, int level) {
         if (node == null)
             return;
 
@@ -22,8 +23,27 @@ public class Q102_Binary_Tree_Level_Order_Traversal {
         }
 
         list.get(level).add(node.val);
-        helper(list, node.left, level+1);
-        helper(list, node.right, level+1);
+        helperOld(list, node.left, level+1);
+        helperOld(list, node.right, level+1);
+    }
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<>();
+        helper(root, res, 0);
+        return res;
+    }
+
+    private void helper(TreeNode node, List<List<Integer>> res, int level) {
+        if ( node == null )
+            return;
+
+        if ( res.size() == level ) {
+            res.add(new LinkedList<>());
+        }
+
+        res.get(level).add(node.val);
+        helper(node.left, res, level+1);
+        helper(node.right, res, level+1);
     }
 
     public static void main(String[] args) {
