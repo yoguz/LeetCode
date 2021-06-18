@@ -2,7 +2,7 @@ import common.TreeNode;
 
 public class Q104_Maximum_Depth_of_Binary_Tree {
 
-    public int maxDepth(TreeNode root) {
+    public int maxDepthOld(TreeNode root) {
         if (root == null)
             return 0;
 
@@ -14,6 +14,13 @@ public class Q104_Maximum_Depth_of_Binary_Tree {
             return level-1;
 
         return Math.max(level, Math.max(helper(node.left, level+1), helper(node.right, level+1)));
+    }
+
+    public int maxDepth(TreeNode root) {
+        if ( root == null )
+            return 0;
+
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 
     public static void main(String[] args) {
