@@ -1,6 +1,6 @@
 public class Q70_Climbing_Stairs {
 
-    public int climbStairs(int n) {
+    public int climbStairsOld(int n) {
         if (n == 1)
             return 1;
         else if (n == 2)
@@ -15,6 +15,18 @@ public class Q70_Climbing_Stairs {
         }
 
         return step;
+    }
+
+    public int climbStairs(int n) {
+        int p0 = 1, p1 = 1, tmp;
+
+        for (int i = 2; i <= n; ++i) {
+            tmp = p0 + p1;
+            p0 = p1;
+            p1 = tmp;
+        }
+
+        return p1;
     }
 
     public static void main(String[] args) {
