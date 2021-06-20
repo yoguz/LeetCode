@@ -2,11 +2,22 @@ import common.TreeNode;
 
 public class Q100_Same_Tree {
 
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    public boolean isSameTreeOld(TreeNode p, TreeNode q) {
         if ((p == null && q != null) || (p != null && q == null))
             return false;
         else if (p == null && q == null)
             return true;
+        return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null)
+            return true;
+        else if (p != null && q == null)
+            return false;
+        else if (p == null && q != null)
+            return false;
+
         return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
