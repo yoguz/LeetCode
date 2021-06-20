@@ -1,6 +1,6 @@
 public class Q647_Palindromic_Substrings {
 
-    public int countSubstrings(String s) {
+    public int countSubstringsOld(String s) {
         int count = 0;
         for (int i = 0; i < s.length(); ++i) {
             count += countOdd(s, i, 0);
@@ -31,8 +31,37 @@ public class Q647_Palindromic_Substrings {
         return 0;
     }
 
+    public int countSubstrings(String s) {
+        int count = 0;
+        for (int i = 0; i < s.length(); ++i) {
+            int j = 0;
+
+            while ((i - j) >= 0 && (i + j) < s.length()) {
+                if (s.charAt(i-j) == s.charAt(i+j)) {
+                    count++;
+                    j++;
+                } else {
+                    break;
+                }
+            }
+
+            j = 0;
+            while ((i - j) >= 0 && (i + j + 1) < s.length()) {
+                if (s.charAt(i-j) == s.charAt(i+j+1)) {
+                    count++;
+                    j++;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
         Q647_Palindromic_Substrings obj = new Q647_Palindromic_Substrings();
+        System.out.println(obj.countSubstrings("abc"));
         System.out.println(obj.countSubstrings("aa"));
         System.out.println(obj.countSubstrings("aaa"));
         System.out.println(obj.countSubstrings("aaaa"));
