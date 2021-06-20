@@ -8,7 +8,7 @@ public class Q49_Group_Anagrams {
             return res;
 
         Map<String, List<String>> map = new HashMap<>();
-        for (String s: strs) {
+        for (String s : strs) {
             char[] carr = s.toCharArray();
             Arrays.sort(carr);
             String key = new String(carr);
@@ -17,7 +17,7 @@ public class Q49_Group_Anagrams {
             map.get(key).add(s);
         }
 
-        map.forEach((k,v) -> res.add(v));
+        map.forEach((k, v) -> res.add(v));
         return res;
     }
 
@@ -26,15 +26,15 @@ public class Q49_Group_Anagrams {
             return new ArrayList<>();
 
         Map<String, List<String>> map = new HashMap<>();
-        for (String s: strs) {
+        for (String s : strs) {
             int[] arr = new int[26];
-            for(int i = 0;i<s.length();i++){
+            for (int i = 0; i < s.length(); i++) {
                 arr[s.charAt(i) - 'a']++;
             }
             String key = Arrays.toString(arr);
             List<String> tempList = map.getOrDefault(key, new LinkedList<String>());
             tempList.add(s);
-            map.put(key,tempList);
+            map.put(key, tempList);
         }
 
         return new ArrayList<>(map.values());
@@ -42,9 +42,9 @@ public class Q49_Group_Anagrams {
 
     public static void main(String[] args) {
         Q49_Group_Anagrams obj = new Q49_Group_Anagrams();
-        List<List<String>> res = obj.groupAnagramsBetter(new String[]{"eat","tea","tan","ate","nat","bat"});
-        for (List<String> elem: res) {
-            for (String i: elem)
+        List<List<String>> res = obj.groupAnagramsBetter(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"});
+        for (List<String> elem : res) {
+            for (String i : elem)
                 System.out.print(i + ", ");
             System.out.println();
         }
