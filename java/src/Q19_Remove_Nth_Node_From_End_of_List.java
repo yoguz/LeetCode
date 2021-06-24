@@ -2,7 +2,7 @@ import common.ListNode;
 
 public class Q19_Remove_Nth_Node_From_End_of_List {
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    public ListNode removeNthFromEndOld(ListNode head, int n) {
         if (head == null)
             return null;
 
@@ -22,6 +22,24 @@ public class Q19_Remove_Nth_Node_From_End_of_List {
 
         before.next = before.next.next;
         return head;
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode temp = new ListNode(0, head);
+        ListNode p1 = temp, p2 = temp;
+
+        while (n > 0) {
+            p2 = p2.next;
+            n--;
+        }
+
+        while (p2.next != null) {
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        p1.next = p1.next.next;
+        return p1 == temp ? p1.next : head;
     }
 
     public static void main(String[] args) {
