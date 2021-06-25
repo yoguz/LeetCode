@@ -1,10 +1,9 @@
 public class Q191_Number_of_1_Bits {
 
-    public int hammingWeight(int n) {
+    public int hammingWeightOld(int n) {
         int res = 0;
-        if (n == 0)
-            return res;
-        else if (n > 0) {
+
+        if (n > 0) {
             while (n > 0) {
                 res += n%2;
                 n /= 2;
@@ -17,7 +16,15 @@ public class Q191_Number_of_1_Bits {
             res = 32 - res;
         }
         return res;
+    }
 
+    public int hammingWeight(int n) {
+        int sum = 0;
+        while (n != 0) {
+            sum++;
+            n &= (n - 1);
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
