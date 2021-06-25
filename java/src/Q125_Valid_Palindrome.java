@@ -1,6 +1,6 @@
 public class Q125_Valid_Palindrome {
 
-    public boolean isPalindrome(String s) {
+    public boolean isPalindromeOld(String s) {
         int start = 0;
         int end = s.length() - 1;
 
@@ -16,6 +16,41 @@ public class Q125_Valid_Palindrome {
             }
             start++;
             end--;
+        }
+
+        return true;
+    }
+
+    public boolean isPalindrome(String s) {
+        int i = 0, j = s.length() - 1;
+        char ci, cj;
+        while (i < j) {
+            try {
+                ci = s.charAt(i);
+                cj = s.charAt(j);
+
+
+                while (!Character.isLetterOrDigit(ci)) {
+                    i++;
+                    ci = s.charAt(i);
+                }
+
+                while (!Character.isLetterOrDigit(cj)) {
+                    j--;
+                    cj = s.charAt(j);
+                }
+            } catch (Exception e) {
+                return true;
+            }
+
+            ci = Character.toLowerCase(ci);
+            cj = Character.toLowerCase(cj);
+
+            if (ci != cj)
+                return false;
+
+            i++;
+            j--;
         }
 
         return true;
