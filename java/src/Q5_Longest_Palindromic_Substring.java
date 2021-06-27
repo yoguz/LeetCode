@@ -43,7 +43,7 @@ public class Q5_Longest_Palindromic_Substring {
         return res;
     }
 
-    public String longestPalindrome(String s) {
+    public String longestPalindromeWorse(String s) {
         String longestOdd = "", longestEven = "";
 
         int start = 0, end = 0, max = 1;
@@ -86,6 +86,37 @@ public class Q5_Longest_Palindromic_Substring {
         longestEven = s.substring(start, end+1);
 
         return longestOdd.length() > longestEven.length() ? longestOdd : longestEven;
+    }
+
+    public String longestPalindrome(String s) {
+        int center = 0, max = 1;
+        int oddLength = 0, evenLength = 0;
+
+        for (int i = 0; i < s.length(); ++i) {
+            oddLength = extend(s, i, i);
+            evenLength = extend(s, i, i+1);
+
+            int newMax = Math.max(max, Math.max(oddLength, evenLength));
+            if (newMax != max) {
+                center = i;
+                max = newMax;
+            }
+        }
+
+        return s.substring(center - (max - 1) / 2, center + max / 2 + 1);
+    }
+
+    private int extend(String s, int start, int end) {
+        int width = 0;
+        while (start - width >= 0 && end + width < s.length()) {
+            if (s.charAt(start-width) == s.charAt(end+width)) {
+                width++;
+            } else {
+                break;
+            }
+        }
+
+        return end - start + (2 * width) - 1;
     }
 
     public static void main(String[] args) {
