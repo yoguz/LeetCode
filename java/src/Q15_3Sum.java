@@ -38,7 +38,7 @@ public class Q15_3Sum {
         return list;
     }
 
-    public List<List<Integer>> threeSum(int[] nums) {
+    public List<List<Integer>> threeSumOld(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> list = new ArrayList<>();
         if (nums.length < 3)
@@ -71,6 +71,44 @@ public class Q15_3Sum {
         }
 
         return list;
+    }
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        Map<Integer, Integer> counts = new HashMap<>();
+        Set<String> resultSet = new HashSet<>();
+
+        for (int i: nums) {
+            counts.merge(i, 1, Integer::sum);
+        }
+
+        List<List<Integer>> result = new LinkedList<>();
+
+        int complement = 0, twoSum = 0;
+        for (int i = 0; i < nums.length; ++i) {
+            if (nums[i] > 0)
+                break;
+            for (int j = i+1; j < nums.length; ++j) {
+                twoSum = -(nums[i] + nums[j]);
+                if (twoSum < 0)
+                    break;
+                complement = counts.getOrDefault(twoSum, 0);
+
+                if (complement > 2 || (complement > 1 && nums[i] != twoSum)
+                        || (complement > 1 && nums[j] != twoSum)
+                        || (complement > 0 && nums[i] != twoSum && nums[j] != twoSum)) {
+
+                    Integer[] res = new Integer[]{nums[i], nums[j], twoSum};
+                    Arrays.sort(res);
+                    String key = res[0] + "," + res[1] + "," + res[2];
+                    if (!resultSet.contains(key)) {
+                        resultSet.add(key);
+                        result.add(Arrays.asList(res));                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
