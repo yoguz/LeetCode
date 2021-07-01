@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Q3_Longest_Substring_Without_Repeating_Characters {
 
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstringOld(String s) {
         if (s.length() < 2)
             return s.length();
 
@@ -19,6 +19,29 @@ public class Q3_Longest_Substring_Without_Repeating_Characters {
             indexes.put(s.charAt(hi), hi);
             hi++;
             max = Math.max(max, hi-lo);
+        }
+
+        return max;
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        int[] counts = new int[256];
+        int left = 0, right = 0, max = 0;
+
+        while (right < s.length()) {
+            char c = s.charAt(right);
+
+            if (counts[c] == 0) {
+                counts[c]++;
+                max = Math.max(max, right-left+1);
+                right++;
+            } else {
+                while (counts[c] > 0) {
+                    char toDelete = s.charAt(left);
+                    counts[toDelete]--;
+                    left++;
+                }
+            }
         }
 
         return max;
