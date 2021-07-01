@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Q54_Spiral_Matrix {
@@ -13,30 +14,30 @@ public class Q54_Spiral_Matrix {
         direction dir = direction.R;
         while (bot - top  > 1 && right - left > 1) {
             switch (dir) {
-                case R:
-                    for(int i = left+1; i < right; ++i)
-                        list.add(matrix[top+1][i]);
+                case R -> {
+                    for (int i = left + 1; i < right; ++i)
+                        list.add(matrix[top + 1][i]);
                     top++;
                     dir = direction.D;
-                    break;
-                case D:
-                    for(int i = top+1; i < bot; ++i)
-                        list.add(matrix[i][right-1]);
+                }
+                case D -> {
+                    for (int i = top + 1; i < bot; ++i)
+                        list.add(matrix[i][right - 1]);
                     right--;
                     dir = direction.L;
-                    break;
-                case L:
-                    for(int i = right-1; i > left; --i)
-                        list.add(matrix[bot-1][i]);
+                }
+                case L -> {
+                    for (int i = right - 1; i > left; --i)
+                        list.add(matrix[bot - 1][i]);
                     bot--;
                     dir = direction.U;
-                    break;
-                case U:
-                    for(int i = bot-1; i > top; --i)
-                        list.add(matrix[i][left+1]);
+                }
+                case U -> {
+                    for (int i = bot - 1; i > top; --i)
+                        list.add(matrix[i][left + 1]);
                     left++;
                     dir = direction.R;
-                    break;
+                }
             }
         }
 
@@ -64,13 +65,6 @@ public class Q54_Spiral_Matrix {
         }
         System.out.println();
         list = obj.spiralOrder(new int[][]{
-                {}
-        });
-        for (int i : list) {
-            System.out.print(i + ", ");
-        }
-        System.out.println();
-        list = obj.spiralOrder(new int[][]{
                 {1,2,3,4}
         });
         for (int i : list) {
@@ -87,11 +81,6 @@ public class Q54_Spiral_Matrix {
             System.out.print(i + ", ");
         }
         System.out.println();
-        list = obj.spiralOrder(new int[][]{
 
-        });
-        for (int i : list) {
-            System.out.print(i + ", ");
-        }
     }
 }
