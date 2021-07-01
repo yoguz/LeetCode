@@ -1,6 +1,6 @@
 public class Q121_Best_Time_to_Buy_and_Sell_Stock {
 
-    public int maxProfit(int[] prices) {
+    public int maxProfitOld(int[] prices) {
         if (prices.length < 2)
             return 0;
 
@@ -14,6 +14,16 @@ public class Q121_Best_Time_to_Buy_and_Sell_Stock {
         }
 
         return profit;
+    }
+
+    public int maxProfit(int[] prices) {
+        int minSoFar = prices[0], max = 0;
+        for (int i = 1; i < prices.length; ++i) {
+            max = Math.max(max, prices[i] - minSoFar);
+            minSoFar = Math.min(minSoFar, prices[i]);
+        }
+
+        return max;
     }
 
     public static void main(String[] args) {
