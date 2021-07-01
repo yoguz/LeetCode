@@ -1,6 +1,6 @@
 public class Q122_Best_Time_to_Buy_and_Sell_Stock_II {
 
-    public int maxProfit(int[] prices) {
+    public int maxProfitOld(int[] prices) {
         if (prices.length < 2)
             return 0;
 
@@ -24,6 +24,34 @@ public class Q122_Best_Time_to_Buy_and_Sell_Stock_II {
             profit += prices[prices.length-1] - low;
         }
 
+        return profit;
+    }
+
+    public int maxProfit(int[] prices) {
+        int lastBuy = -1, profit = 0, n = prices.length;
+        for (int i = 0; i < n-1; ++i) {
+            if (lastBuy == -1 && prices[i] < prices[i+1]) {
+                lastBuy = prices[i];
+            } else if (lastBuy != -1 && prices[i] < lastBuy) {
+                lastBuy = prices[i];
+            } else if (lastBuy != -1 && prices[i] > prices[i+1]) {
+                profit += prices[i] - lastBuy;
+                lastBuy = -1;
+            }
+        }
+
+        if (prices[n-1] > lastBuy && lastBuy != -1)
+            profit += prices[n-1] - lastBuy;
+
+        return profit;
+    }
+
+    public int maxProfitBest(int[] prices) {
+        int profit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1])
+                profit += prices[i] - prices[i - 1];
+        }
         return profit;
     }
 
