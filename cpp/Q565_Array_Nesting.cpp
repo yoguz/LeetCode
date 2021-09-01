@@ -29,5 +29,6 @@ int main()
 
     vector<int> vec3{0, 2, 1};
     cout << arrayNesting(vec3) << endl;
+    
     return 0;
 }
