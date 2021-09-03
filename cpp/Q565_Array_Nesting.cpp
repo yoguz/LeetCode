@@ -1,22 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int arrayNesting(vector<int> &a)
+int arrayNesting(vector<int> &nums)
 {
-    size_t maxsize = 0;
-    for (int i = 0; i < a.size(); i++)
+    int maxCount = 0;
+
+    for (size_t i = 0; i < nums.size(); ++i)
     {
-        size_t size = 0;
-        for (int k = i; a[k] >= 0; size++)
+        int count = 0;
+
+        for (size_t k = i; nums[k] != -1; ++count)
         {
-            int ak = a[k];
-            a[k] = -1; // mark a[k] as visited;
-            k = ak;
+            int temp = nums[k];
+            nums[k] = -1;
+            k = temp;
         }
-        maxsize = max(maxsize, size);
+
+        maxCount = max(maxCount, count);
     }
 
-    return maxsize;
+    return maxCount;
 }
 
 int main()
@@ -29,6 +32,6 @@ int main()
 
     vector<int> vec3{0, 2, 1};
     cout << arrayNesting(vec3) << endl;
-    
+
     return 0;
 }
