@@ -84,22 +84,18 @@ struct TreeNode
             {
                 for (int j = 0; j < line.size(); j++)
                 {
-
-                    // split node
-                    char c = ' ';
                     if (j % 2 == 1)
                     {
                         if (line[j - 1] != "")
                         {
-                            c = (line[j] != "") ? '┴' : '┘';
+                            cout << (line[j] != "") ? "┴" : "┘";
                         }
                         else
                         {
                             if (j < line.size() && line[j] != "")
-                                c = '└';
+                               cout << "└";
                         }
                     }
-                    cout << c;
 
                     // lines and spaces
                     if (line[j] == "")
